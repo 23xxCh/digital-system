@@ -7,7 +7,7 @@ name = "smds"
 version = "1.0.0"
 description = "Smart Manufacturing Digital Twin System"
 requires-python = ">=3.10"
-dependencies = ["numpy>=1.24"]
+dependencies = ["numpy>=1.24", "torch>=2.0"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
