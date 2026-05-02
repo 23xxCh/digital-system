@@ -42,10 +42,13 @@ class DQNAgent:
         eps = epsilon if epsilon is not None else self.epsilon()
         if random.random() < eps:
             return random.randrange(self.config.action_dim)
+        self.q_main.eval()
         with torch.no_grad():
             state_t = torch.FloatTensor(state).unsqueeze(0).to(self.device)
             q_values = self.q_main(state_t)
-            return q_values.argmax(dim=1).item()
+            action = q_values.argmax(dim=1).item()
+        self.q_main.train()
+        return action
 
     def train_step(self) -> Optional[float]:
         if len(self.replay) < self.config.min_replay_size:
